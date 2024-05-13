@@ -1,0 +1,2456 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "$$hashKey": "object:2193",
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "Monitored Server Performance",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 21,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "influxdb",
+          "uid": "13sJXK1Mz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 6,
+        "panels": [],
+        "title": "Overview",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "decimals": 4,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "dtdurations"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 10,
+          "x": 0,
+          "y": 1
+        },
+        "id": 14,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT top 1\r\n  \r\n  vPerf.MaxValue\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'System Up Time'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n Order by datetime desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "System Up Time",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 10,
+          "y": 1
+        },
+        "id": 27,
+        "maxDataPoints": 100,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT top 1\r\nvPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like 'Memory')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'PercentMemoryUsed'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\norder by vPerf.Datetime desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Memory Used",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 14,
+          "y": 1
+        },
+        "id": 28,
+        "maxDataPoints": 100,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT top 1\r\nvPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName like '% Processor Time'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\norder by vPerf.Datetime desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Processor Time",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 3,
+          "x": 17,
+          "y": 1
+        },
+        "id": 29,
+        "maxDataPoints": 100,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT top 1\r\nvPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'PercentBandwidthUsedTotal'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\norder by vPerf.Datetime desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Bandwidth Used Total",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 5
+                },
+                {
+                  "color": "#299c46",
+                  "value": 10
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 4,
+          "x": 20,
+          "y": 1
+        },
+        "id": 30,
+        "maxDataPoints": 100,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto"
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT top 1\r\nvPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName like '% Free Space'\r\n AND vPerformanceRuleInstance.InstanceName like 'C:'\r\n AND vManagedEntity.Path like '[[Server]]'\r\norder by vPerf.Datetime desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "System Disk % Free Space",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 5
+        },
+        "id": 2,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime,  \r\n vPerf.SampleCount,   \r\n vPerf.AverageValue,  \r\n vPerf.MinValue,  \r\n vPerf.MaxValue,  \r\n vPerf.StandardDeviation,   \r\n vPerformanceRuleInstance.InstanceName,   \r\n vManagedEntity.Path,   \r\n vPerformanceRule.ObjectName,   \r\n  vPerformanceRule.CounterName  \r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n vManagedEntity.Path like '[[Server]]'  \r\n and vPerf.DateTime > getdate()\r\n order by [DateTime] desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Performance Counter Query",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Name"
+              },
+              "properties": [
+                {
+                  "id": "custom.width",
+                  "value": 439
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 860,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": []
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "rawSql": "SELECT TOP 20 \r\n  TimeRaised\r\n  ,AlertStringName\r\n  ,TicketId\r\n  \r\n  ,Category\r\n  ,Owner\r\n  ,CustomField1 as [Ticket Status]\r\n  ,CustomField5 as [Assigned Group]\r\n  ,CustomField6 as [Impact]\r\n  ,CustomField6 as [Urgency]\r\nFROM Alertview WITH (NOLOCK) \r\nWHERE Timeraised is not NULL and ResolutionState < 256 and (MonitoringObjectName like '%[[Server]]%' or MonitoringObjectPath like '%[[Server]]%')\r\nORDER BY [TimeRaised] desc",
+            "refId": "A"
+          }
+        ],
+        "title": "$Server Newest 20 Alerts",
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "influxdb",
+          "uid": "13sJXK1Mz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 20
+        },
+        "id": 11,
+        "panels": [],
+        "title": "CPU",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 0,
+          "y": 21
+        },
+        "id": 12,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRule.ObjectName as label,\r\n  vPerf.MaxValue\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'Processor Queue Length'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\n Order by datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Processor Queue Length",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 12,
+          "x": 12,
+          "y": 21
+        },
+        "id": 15,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRule.ObjectName as label,\r\n  vPerf.MaxValue\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName like '% Processor Time'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\n Order by datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server % Processor Time",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "influxdb",
+          "uid": "13sJXK1Mz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 26
+        },
+        "id": 22,
+        "panels": [],
+        "title": "Memory",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "decimals": 2,
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 27
+        },
+        "id": 20,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.4.3",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000022"
+            },
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as [NIC],\r\n vPerf.MaxValue as [Used %]\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like 'Memory')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'PercentMemoryUsed'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server % Memory Used",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decbytes"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "MaxValue Available MBytes"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "decmbytes"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 27
+        },
+        "id": 23,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.4.3",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000022"
+            },
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n OperationsManagerDW.dbo.vPerformanceRule.CounterName as [Counter],\r\n vPerf.MaxValue\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like 'Memory')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like '%Bytes'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Memory Used",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "influxdb",
+          "uid": "13sJXK1Mz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 34
+        },
+        "id": 18,
+        "panels": [],
+        "title": "Network",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "Bps"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 35
+        },
+        "id": 16,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as [NIC],\r\n vPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like 'Network%')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'Bytes Total/sec'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Network: Bytes per Second",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 35
+        },
+        "id": 19,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as [NIC],\r\n vPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like 'Network Adapter')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'PercentBandwidthUsedTotal'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server % Bandwidth Used",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "influxdb",
+          "uid": "13sJXK1Mz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 44
+        },
+        "id": 8,
+        "panels": [],
+        "title": "Disk",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "decmbytes"
+          },
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "value C:"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 45
+        },
+        "id": 4,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as [Drive Letter],\r\n vPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf \r\n INNER JOIN OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId \r\n INNER JOIN OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId \r\n INNER JOIN OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like '%disk%')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'Free Megabytes'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Free Megabytes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "MaxValue C:"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 45
+        },
+        "id": 9,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as label,\r\n  vPerf.MaxValue\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like '%disk%')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like '% Idle Time'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\n Order by datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server % Idle Time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "value C:"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 54
+        },
+        "id": 24,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as [Drive Letter],\r\n vPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like '%disk%')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'Avg. Disk sec/Transfer'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Avg. Disk sec/Transfer",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "__systemRef": "hideSeriesFrom",
+              "matcher": {
+                "id": "byNames",
+                "options": {
+                  "mode": "exclude",
+                  "names": [
+                    "value C:"
+                  ],
+                  "prefix": "All except:",
+                  "readOnly": true
+                }
+              },
+              "properties": [
+                {
+                  "id": "custom.hideFrom",
+                  "value": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": true
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 54
+        },
+        "id": 25,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "8.5.5",
+        "targets": [
+          {
+            "alias": "",
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName as [Drive Letter],\r\n vPerf.MaxValue as value\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like '%disk%')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like 'Current Disk Queue Length'  \r\n AND vManagedEntity.Path like '[[Server]]'\r\n and $__timeFilter(vPerf.Datetime)\r\norder by vPerf.Datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "$Server Current Disk Queue Length",
+        "type": "timeseries"
+      },
+      {
+        "collapsed": true,
+        "datasource": {
+          "type": "influxdb",
+          "uid": "13sJXK1Mz"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 63
+        },
+        "id": 41,
+        "panels": [
+          {
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "description": "Up/Down state of servers monitored by SCOM",
+            "fieldConfig": {
+              "defaults": {
+                "color": {
+                  "mode": "thresholds"
+                },
+                "mappings": [
+                  {
+                    "options": {
+                      "0": {
+                        "text": "DOWN"
+                      },
+                      "1": {
+                        "text": "UP"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ],
+                "noValue": "N/A",
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "light-red"
+                    },
+                    {
+                      "color": "green",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              "overrides": []
+            },
+            "gridPos": {
+              "h": 4,
+              "w": 2,
+              "x": 0,
+              "y": 64
+            },
+            "id": 43,
+            "links": [
+              {
+                "targetBlank": true,
+                "title": "Open SCOM Health Explorer",
+                "url": "https://scomweb/MonitoringView/ResultViews/ViewTypeHealthExplorer.aspx?targetId=[[MonitoredServer]]"
+              }
+            ],
+            "maxPerRow": 12,
+            "options": {
+              "colorMode": "background",
+              "graphMode": "none",
+              "justifyMode": "auto",
+              "orientation": "auto",
+              "reduceOptions": {
+                "calcs": [
+                  "lastNotNull"
+                ],
+                "fields": "",
+                "values": false
+              },
+              "text": {},
+              "textMode": "auto"
+            },
+            "pluginVersion": "8.5.5",
+            "repeat": "MonitoredServer",
+            "repeatDirection": "h",
+            "targets": [
+              {
+                "alias": "",
+                "format": "table",
+                "rawSql": "SELECT [HealthState]\r\n  FROM [OperationsManager].[dbo].[StateView] as SV\r\n  inner join [OperationsManager].[dbo].[BaseManagedEntity] as Entity on Entity.BaseManagedEntityId = SV.[BaseManagedEntityId]\r\n  where [MonitorName] = 'Microsoft.Windows.Server.Computer.OSAvailabilityRollup' and Entity.[DisplayName] = [[MonitoredServer]]",
+                "refId": "A"
+              }
+            ],
+            "title": "[[MonitoredServer]]",
+            "type": "stat"
+          }
+        ],
+        "title": "Health State - All Servers",
+        "type": "row"
+      }
+    ],
+    "refresh": "5m",
+    "schemaVersion": 39,
+    "tags": [
+      "SCOM",
+      "MSSQL"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "[[server]]",
+            "value": "[[server]]"
+          },
+          "datasource": {
+            "type": "mssql",
+            "uid": "000000022"
+          },
+          "definition": "",
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "Server",
+          "options": [],
+          "query": "Select Path FROM [OperationsManagerDW].[dbo].[vManagedEntity]   where Path is not null    and FullName like '%OperatingSystem%'",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "mssql",
+            "uid": "000000005"
+          },
+          "definition": "SELECT [Path]\n  FROM [OperationsManager].[dbo].[BaseManagedEntity]\n  where [FullName] like 'Microsoft.SystemCenter.HealthService%' and [Path] not like 'Microsoft%'\n  order by [Path]",
+          "hide": 0,
+          "includeAll": true,
+          "multi": true,
+          "name": "MonitoredServer",
+          "options": [],
+          "query": "SELECT [Path]\n  FROM [OperationsManager].[dbo].[BaseManagedEntity]\n  where [FullName] like 'Microsoft.SystemCenter.HealthService%' and [Path] not like 'Microsoft%'\n  order by [Path]",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "System Center Operations Manager - Server Performance",
+    "uid": "Xr8tUDKmz",
+    "version": 39,
+    "weekStart": ""
+  }
