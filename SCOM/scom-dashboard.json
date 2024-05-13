@@ -1,0 +1,2359 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 15,
+    "links": [],
+    "panels": [
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 1000
+                },
+                {
+                  "color": "#d44a3a"
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 4,
+          "x": 0,
+          "y": 0
+        },
+        "id": 21,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as Windows\r\n\r\n  FROM [OperationsManager].[dbo].[MTV_Computer]",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Agent Monitored Servers and Clusters",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 1000
+                },
+                {
+                  "color": "#d44a3a"
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 4,
+          "y": 0
+        },
+        "id": 28,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as Nodes\r\nFROM [OperationsManager].[dbo].[MTV_System$NetworkManagement$Node]",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Ping & SNMP Monitored Devices",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 1000
+                },
+                {
+                  "color": "#d44a3a"
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 7,
+          "y": 0
+        },
+        "id": 29,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as Unix\r\n\r\n  FROM [OperationsManager].[dbo].[MTV_Microsoft$Unix$Computer]",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Agent Monitored Linux Servers",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 50
+                },
+                {
+                  "color": "#d44a3a"
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 10,
+          "y": 0
+        },
+        "id": 30,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as Severe\r\n  FROM [OperationsManager].[dbo].[AlertView]\r\n  WHere [TimeResolved] is null and Severity = 0",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Alerts: Severe",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 500
+                },
+                {
+                  "color": "#d44a3a"
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 13,
+          "y": 0
+        },
+        "id": 31,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as Warning\r\n  FROM [OperationsManager].[dbo].[AlertView]\r\n  WHere [TimeResolved] is null and Severity = 1",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Alerts: Warning",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 500
+                },
+                {
+                  "color": "#d44a3a"
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 16,
+          "y": 0
+        },
+        "id": 32,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as Info\r\n  FROM [OperationsManager].[dbo].[AlertView]\r\n  WHere [TimeResolved] is null and Severity = 2",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Alerts: Information",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000007"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#d44a3a",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 0
+                },
+                {
+                  "color": "#299c46",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 2,
+          "w": 3,
+          "x": 19,
+          "y": 0
+        },
+        "id": 33,
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000007"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT count(*) as metric\r\n  FROM [lansweeperdb].[scorch].[SCOM]\r\n  ",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Total Assets Monitored",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 0,
+          "y": 2
+        },
+        "id": 35,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {
+            "titleSize": 10
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "time_series",
+            "rawSql": "SELECT\n  $__timeEpoch([TimeRaised]),\n  count(*) as value\n  \nFROM\n  [OperationsManager].[dbo].[AlertView]\nWHERE\n  $__timeFilter([TimeRaised]) and [AlertStringName] like 'MSSQL on Windows: Log Backup Failed to Complete' and [ResolutionState] = 0\n  Group By [AlertStringName], [TimeRaised]\nORDER BY\n  TimeRaised DESC",
+            "refId": "A"
+          }
+        ],
+        "title": "SQL Log Backup Failures",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 3,
+          "y": 2
+        },
+        "id": 37,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "time_series",
+            "rawSql": "SELECT\n  $__timeEpoch([TimeRaised]),\n  count(*) as value\n  \nFROM\n  [OperationsManager].[dbo].[AlertView]\nWHERE\n  $__timeFilter([TimeRaised]) and [AlertStringName] like 'MSSQL on Windows: Database log file is full. Back up the transaction log for the database to free up some log space' and [ResolutionState] = 0\n  Group By [AlertStringName], [TimeRaised]\nORDER BY\n  TimeRaised DESC",
+            "refId": "A"
+          }
+        ],
+        "title": "SQL Log Full",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 6,
+          "y": 2
+        },
+        "id": 39,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "time_series",
+            "rawSql": "SELECT\n  $__timeEpoch([TimeRaised]),\n  count(*) as value\n  \nFROM\n  [OperationsManager].[dbo].[AlertView]\nWHERE\n  $__timeFilter([TimeRaised]) and [AlertStringName] like 'Failed to Connect to Computer' and [ResolutionState] = 0\n  Group By [AlertStringName], [TimeRaised]\nORDER BY\n  TimeRaised DESC",
+            "refId": "A"
+          }
+        ],
+        "title": "Computer Unreachable",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "locale"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 9,
+          "y": 2
+        },
+        "id": 41,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "time_series",
+            "rawSql": "SELECT\n  $__timeEpoch([TimeRaised]),\n  count(*) as value\n  \nFROM\n  [OperationsManager].[dbo].[AlertView]\nWHERE\n  $__timeFilter([TimeRaised]) and [AlertStringName] like 'Network Device is Not Responding' and [ResolutionState] = 0\n  Group By [AlertStringName], [TimeRaised]\nORDER BY\n  TimeRaised DESC",
+            "refId": "A"
+          }
+        ],
+        "title": "Network Device Unreachable",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 12,
+          "y": 2
+        },
+        "id": 43,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "time_series",
+            "rawSql": "SELECT\n  $__timeEpoch([TimeRaised]),\n  count(*) as value\n  \nFROM\n  [OperationsManager].[dbo].[AlertView]\nWHERE\n  $__timeFilter([TimeRaised]) and [AlertStringName] like 'Logical Disk Free Space is low' and [ResolutionState] = 0\n  Group By [AlertStringName], [TimeRaised]\nORDER BY\n  TimeRaised DESC",
+            "refId": "A"
+          }
+        ],
+        "title": "Low Disk Space",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "noValue": "0",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 5,
+          "w": 3,
+          "x": 15,
+          "y": 2
+        },
+        "id": 45,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "rawSql": "/****** Script for SelectTopNRows command from SSMS  ******/\r\nSELECT count([IsInMaintenanceMode])\r\n  FROM [OperationsManager].[dbo].[MaintenanceMode] as MM\r\n  inner join [OperationsManager].[dbo].[MTV_Microsoft$Windows$OperatingSystem] on [OperationsManager].[dbo].[MTV_Microsoft$Windows$OperatingSystem].BaseManagedEntityId = MM.[BaseManagedEntityId]\r\n  where [IsInMaintenanceMode] = 1",
+            "refId": "A"
+          }
+        ],
+        "title": "Servers in Maintenance Mode",
+        "type": "stat"
+      },
+      {
+        "collapsed": false,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 7
+        },
+        "id": 25,
+        "panels": [],
+        "targets": [
+          {
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "refId": "A"
+          }
+        ],
+        "title": "OpsMgr Sample Queries",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": false,
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "id": 19,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000022"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime,  \r\n vPerf.AverageValue,  \r\n vPerf.MinValue,  \r\n vPerf.MaxValue,  \r\n vPerformanceRuleInstance.InstanceName,   \r\n vManagedEntity.Path,   \r\n vPerformanceRule.ObjectName,   \r\n  vPerformanceRule.CounterName  \r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like '%disk%')  \r\n --AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like '%sec/T%'  \r\n AND vManagedEntity.Path like '%-DC02%'  \r\n and vPerf.DateTime > getdate()-30\r\n Order by [DateTime] desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Performance Counter Query",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 7,
+          "x": 12,
+          "y": 8
+        },
+        "id": 11,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "SELECT TOP 20 SUM(RepeatCount+1) AS RepeatCount, AlertStringName, AlertStringDescription, Name   \r\n FROM Alertview WITH (NOLOCK)   \r\n WHERE Timeraised is not NULL   \r\n GROUP BY AlertStringName, AlertStringDescription, MonitoringRuleId, Name   \r\n ORDER BY RepeatCount DESC",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Top 20 Alerts in an Operational Database, by Repeat Count",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "EventDisplayNumber"
+              },
+              "properties": [
+                {
+                  "id": "unit",
+                  "value": "none"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 5,
+          "x": 19,
+          "y": 8
+        },
+        "id": 27,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000022"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT top 50 EventDisplayNumber, COUNT(*) AS TotalEvents   \r\n FROM OperationsManagerDW.Event.vEvent   \r\n GROUP BY EventDisplayNumber   \r\n ORDER BY TotalEvents DESC",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Most Common Events by event number",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "description": "'No data to show' is good! It means there are no unresponsive servers!",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 17
+        },
+        "id": 17,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT bme.DisplayName,s.LastModified as LastModifiedUTC, dateadd(hh,-5,s.LastModified) as 'LastModifiedCST (GMT-5)'   \r\n FROM state AS s, BaseManagedEntity AS bme   \r\n WHERE s.basemanagedentityid = bme.basemanagedentityid   \r\n AND s.monitorid   \r\n IN (SELECT MonitorId FROM Monitor WHERE MonitorName = 'Microsoft.SystemCenter.HealthService.ComputerDown')   \r\n AND s.Healthstate = '3' AND bme.IsDeleted = '0'   \r\n ORDER BY s.Lastmodified DESC  ",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Health Service Down",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 17
+        },
+        "id": 9,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT TOP 20 SUM(1) AS AlertCount, AlertStringName, AlertStringDescription, Name   \r\n FROM Alertview WITH (NOLOCK)   \r\n WHERE TimeRaised is not NULL   \r\n GROUP BY AlertStringName, AlertStringDescription, MonitoringRuleId, Name   \r\n ORDER BY AlertCount DESC  ",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Top 20 Alerts in an Operational Database, by Alert Count",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 26
+        },
+        "id": 15,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT mp.MPName, r.RuleCategory, COUNT(*) As RulesPerMPPerCategory   \r\n FROM Rules r   \r\n INNER JOIN ManagementPack mp ON mp.ManagementPackID = r.ManagementPackID   \r\n GROUP BY mp.MPName, r.RuleCategory   \r\n ORDER BY RulesPerMPPerCategory DESC",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Rules per MP by category",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000022"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 10,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 26
+        },
+        "id": 23,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000022"
+            },
+            "format": "time_series",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": " SELECT   \r\n vPerf.DateTime as time,\r\n vPerformanceRuleInstance.InstanceName,\r\n vPerf.AverageValue\r\n FROM OperationsManagerDW.Perf.vPerfHourly AS vPerf INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRuleInstance ON OperationsManagerDW.dbo.vPerformanceRuleInstance.PerformanceRuleInstanceRowId = vPerf.PerformanceRuleInstanceRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vManagedEntity ON vPerf.ManagedEntityRowId = OperationsManagerDW.dbo.vManagedEntity.ManagedEntityRowId INNER JOIN  \r\n  OperationsManagerDW.dbo.vPerformanceRule ON OperationsManagerDW.dbo.vPerformanceRuleInstance.RuleRowId = OperationsManagerDW.dbo.vPerformanceRule.RuleRowId   \r\n WHERE   \r\n (OperationsManagerDW.dbo.vPerformanceRule.ObjectName like '%disk%')  \r\n AND OperationsManagerDW.dbo.vPerformanceRule.CounterName like '% Free Space'  \r\n AND vManagedEntity.Path like '%SCOM%'\r\n and vPerf.DateTime > getdate()-30\r\n Order by datetime",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "% Free Space",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "mssql",
+          "uid": "000000005"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "decimals": 2,
+            "displayName": "",
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "Time"
+              },
+              "properties": [
+                {
+                  "id": "displayName",
+                  "value": "Time"
+                },
+                {
+                  "id": "unit",
+                  "value": "time: YYYY-MM-DD HH:mm:ss"
+                },
+                {
+                  "id": "custom.align"
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 35
+        },
+        "id": 13,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.4.1",
+        "targets": [
+          {
+            "alias": "",
+            "datasource": {
+              "type": "mssql",
+              "uid": "000000005"
+            },
+            "format": "table",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "orderByTime": "ASC",
+            "policy": "default",
+            "rawSql": "select distinct top 50 count(sce.StateId) as NumStateChanges,   \r\n m.DisplayName as MonitorDisplayName,   \r\n m.Name as MonitorIdName,   \r\n mt.typename AS TargetClass   \r\n from StateChangeEvent sce with (nolock)   \r\n join state s with (nolock) on sce.StateId = s.StateId   \r\n join monitorview m with (nolock) on s.MonitorId = m.Id   \r\n join managedtype mt with (nolock) on m.TargetMonitoringClassId = mt.ManagedTypeId   \r\n where m.IsUnitMonitor = 1   \r\n  -- Scoped to within last 7 days   \r\n AND sce.TimeGenerated > dateadd(dd,-7,getutcdate())   \r\n group by m.DisplayName, m.Name,mt.typename   \r\n order by NumStateChanges desc",
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "value"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "title": "Noisiest monitors changing state in the database in the last 7 days.",
+        "transformations": [
+          {
+            "id": "merge",
+            "options": {
+              "reducers": []
+            }
+          }
+        ],
+        "type": "table"
+      }
+    ],
+    "schemaVersion": 39,
+    "tags": [
+      "MSSQL",
+      "SCOM"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "System Center Operations Manager",
+    "uid": "aguN-_Diz",
+    "version": 28,
+    "weekStart": ""
+  }
